@@ -2,15 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import android.os.Environment;
 
-import com.pedropathing.follower.Follower;
-import com.pedropathing.ftc.FollowerBuilder;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Pedro.PedroConstants;
-import org.firstinspires.ftc.teamcode.Pedro.PedroConstantsBioBuzzCompetitionBot;
-import org.firstinspires.ftc.teamcode.Pedro.PedroConstantsBioBuzzDemoBot;
-import org.firstinspires.ftc.teamcode.Pedro.PedroConstantsDecodeBot;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,6 +17,9 @@ public class ControlHub {
         BIOBUZZ_COMPETITION,
         BIOBUZZ_DEMO,
         UNKNOWN,
+        SANDBOX1,
+        SANDBOX2,
+        SANDBOX3
     }
 
     public static final BotIdentification defaultBotIdentification = BotIdentification.BIOBUZZ_COMPETITION;
@@ -109,6 +104,12 @@ public class ControlHub {
                 return "BIOBUZZ_COMPETITION";
             case BIOBUZZ_DEMO:
                 return "BIOBUZZ_DEMO";
+            case SANDBOX1:
+                return "SANDBOX1";
+            case SANDBOX2:
+                return "SANDBOX2";
+            case SANDBOX3:
+                return "SANDBOX3";
             default:
                 return "UNKNOWN";
         }
@@ -126,23 +127,29 @@ public class ControlHub {
                 return BotIdentification.BIOBUZZ_COMPETITION;
             case "BIOBUZZ_DEMO":
                 return BotIdentification.BIOBUZZ_DEMO;
+            case "SANDBOX1":
+                return BotIdentification.SANDBOX1;
+            case "SANDBOX2":
+                return BotIdentification.SANDBOX2;
+            case "SANDBOX3":
+                return BotIdentification.SANDBOX3;
             default:
                 return BotIdentification.UNKNOWN;
         }
     }
 
-    public PedroConstants getRobotSpecificPedroConstants() {
-        switch (getBotIdentification()) {
-            case DECODE:
-                return new PedroConstantsDecodeBot();
-            case BIOBUZZ_COMPETITION:
-                return new PedroConstantsBioBuzzCompetitionBot();
-            case BIOBUZZ_DEMO:
-                return new PedroConstantsBioBuzzDemoBot();
-            default:
-                return new PedroConstantsBioBuzzCompetitionBot(); // Return competition constants
-        }
-    }
+//    public PedroConstants getRobotSpecificPedroConstants() {
+//        switch (getBotIdentification()) {
+//            case DECODE:
+//                return new PedroConstantsDecodeBot();
+//            case BIOBUZZ_COMPETITION:
+//                return new PedroConstantsBioBuzzCompetitionBot();
+//            case BIOBUZZ_DEMO:
+//                return new PedroConstantsBioBuzzDemoBot();
+//            default:
+//                return new PedroConstantsBioBuzzCompetitionBot(); // Return competition constants
+//        }
+//    }
 
     public void processBotIdentificationTelemetry(Telemetry telemetry) {
         telemetry.addLine("--- BOT IDENTIFICATION ---");
@@ -157,13 +164,13 @@ public class ControlHub {
         telemetry.addLine();
     }
 
-    public Follower createFollower(HardwareMap hardwareMap) {
-        PedroConstants pedroConstants = getRobotSpecificPedroConstants();
-
-        return new FollowerBuilder(getRobotSpecificPedroConstants().getFollowerConstants(), hardwareMap)
-                .pathConstraints(pedroConstants.getPathConstraints())
-                .mecanumDrivetrain(pedroConstants.getDriveConstraints())
-                .pinpointLocalizer(pedroConstants.getLocalizerConstants())
-                .build();
-    }
+//    public Follower createFollower(HardwareMap hardwareMap) {
+//        PedroConstants pedroConstants = getRobotSpecificPedroConstants();
+//
+//        return new FollowerBuilder(getRobotSpecificPedroConstants().getFollowerConstants(), hardwareMap)
+//                .pathConstraints(pedroConstants.getPathConstraints())
+//                .mecanumDrivetrain(pedroConstants.getDriveConstraints())
+//                .pinpointLocalizer(pedroConstants.getLocalizerConstants())
+//                .build();
+//    }
 }
